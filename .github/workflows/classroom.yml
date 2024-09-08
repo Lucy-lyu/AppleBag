@@ -1,0 +1,30 @@
+name: Autograding Tests
+'on':
+- workflow_dispatch
+- repository_dispatch
+permissions:
+  checks: write
+  actions: read
+  contents: read
+jobs:
+  run-autograding-tests:
+    runs-on: ubuntu-latest
+    if: github.actor != 'github-classroom[bot]'
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    - name: BagApples Testing
+      id: bagapples-testing
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: BagApples Testing
+        setup-command: mvn compile
+        command: mvn -Dtest=BagApplesTest test
+        timeout: 3
+        max-score: 10
+    - name: Autograding Reporter
+      uses: classroom-resources/autograding-grading-reporter@v1
+      env:
+        BAGAPPLES-TESTING_RESULTS: "${{steps.bagapples-testing.outputs.result}}"
+      with:
+        runners: bagapples-testing
