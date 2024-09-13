@@ -1,6 +1,13 @@
+import java.util.Random;
+
 public class AppleBag {
 
-    public static void main(String[] args) {}
+    private static Random random = new Random();
+
+    public static void main(String[] args) {
+        System.out.println(getApple());
+    }
+    
 
     /*
      * Returns the weight of the next apple to be added to the bag, with 
@@ -22,8 +29,19 @@ public class AppleBag {
      * method will return the number of apples that are added until the combined 
      * weight exceeds 9.5
      */
+
     public static int bagApples(double targetWeight, double allowedVariation) {
-        // Insert code here
+        double totalWeight = 0;
+        int appleCount = 0;
+        double thresholdWeight = targetWeight - allowedVariation;
+
+        // Continue adding apples until the total weight exceeds the threshold
+        while (totalWeight < thresholdWeight) {
+            double appleWeight = getApple();  // Get the next apple's weight
+            totalWeight += appleWeight;       // Add it to the total weight
+            appleCount++;                     // Increment the apple count
+            System.out.println("Added apple of weight: " + appleWeight + " (Total: " + totalWeight + ")");
+        }
         
         return 0;
     }
