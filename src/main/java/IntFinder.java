@@ -35,8 +35,15 @@ public class IntFinder {
      * of eight values (15, 3, 12, and 9) meet all the criteria.
      */
     public static double analyzeInts(int max, int n) {
-        // Insert code here
+        int count = 0;  // Count of numbers that meet the criteria
+
+        for (int i = 0; i < n; i++) {
+            int value = getInt();  // Get the next integer
+            if (value > 0 && value < max && value % 3 == 0) {
+                count++;  // Increment count if the value meets all criteria
+            }
+        }
         
-        return 0;
+        return (double) count / n;
     }
 }
