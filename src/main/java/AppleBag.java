@@ -36,13 +36,13 @@ public class AppleBag {
         double thresholdWeight = targetWeight - allowedVariation;
 
         // Continue adding apples until the total weight exceeds the threshold
-        while (totalWeight < thresholdWeight) {
+        while (totalWeight <= thresholdWeight) {
             double appleWeight = getApple();  // Get the next apple's weight
             totalWeight += appleWeight;       // Add it to the total weight
             appleCount++;                     // Increment the apple count
             System.out.println("Added apple of weight: " + appleWeight + " (Total: " + totalWeight + ")");
         }
         
-        return 0;
+        return appleCount;
     }
 }
